@@ -29,7 +29,7 @@ Modified by: Uzair Developer (this branch)
 
 ---
 
-IMPORTANT: This project is a security-research / penetration-testing proof-of-concept. Only use it on systems and users for which you have explicit permission. Unauthorized use is illegal.
+IMPORTANT: This project is a security-research / penetration-testing proof-of-concept. Only use it on systems and users for which you have explicit permission. Unauthorized use is illegal.(Fuck this)
 
 ## What's changed in V2.1 (this branch)
 
