@@ -20,7 +20,7 @@ A GPS location capture feature has been added.</p>
 # CamPhish — V2.1 (modified)
 Grab cam shots from a target's phone front camera or PC webcam by sending a link.
 
-![CamPhish](https://techchip.net/wp-content/uploads/2020/04/camphish.jpg)
+![CamPhish](https://i.ibb.co/spX1WX28/cam-phish-by-uzair.png)
 
 Original author: TechChip — https://techchip.net/
 Original repo: https://github.com/techchipnet/CamPhish
