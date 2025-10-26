@@ -91,7 +91,7 @@ If the link generation for localhost.run fails, try running the commands below:
 ```bash
 sh-keygen -t rsa -b 4096
   ```
-  this will create a new SSH key pair in the default location (`~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub`).
+This will create a new SSH key pair in the default location (`~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub`) and if it fails for serveo then try running `bash camphish.sh` again.
 
 ## Testing & verifying template generation
 
