@@ -127,5 +127,5 @@ Original repository: https://github.com/techchipnet/CamPhish
 
 Modified by: Uzair Developer [Github](https://github.com/uzairdeveloper223)
 
-CamPhish is inspired by https://github.com/thelinuxchoice/ — thanks to the original authors.
+thanks to the original authors.
 
