@@ -60,6 +60,24 @@ banner() {
     printf " \e[1;93m Modified by: Uzair Developer \e[0m \n"
     printf " \e[1;77m Modified to use Serveo & localhost.run (CloudFlare/ngrok removed in this branch) \e[0m \n\n"
 }
+disclaimer() {
+    printf "\e[1;31m----------------------------- DISCLAIMER -----------------------------\e[0m\n"
+    printf "\e[1;77m This tool is for authorized penetration testing and security\e[0m\n"
+    printf "\e[1;77m research ONLY. You must have explicit written permission from\e[0m\n"
+    printf "\e[1;77m the owner of every target device, system, and network before\e[0m\n"
+    printf "\e[1;77m proceeding. Unauthorized use is a criminal offense under PECA\e[0m\n"
+    printf "\e[1;77m 2016 (Pakistan), CFAA (USA), Computer Misuse Act (UK), and\e[0m\n"
+    printf "\e[1;77m equivalent laws worldwide. The author accepts no liability for\e[0m\n"
+    printf "\e[1;77m misuse. See DISCLAIMER.md for full legal terms.\e[0m\n"
+    printf "\e[1;31m----------------------------------------------------------------------\e[0m\n\n"
+    read -p $'\e[1;93m[!] I confirm I have authorization to use this tool. [yes/no]: \e[0m' confirm
+    confirm=$(printf '%s' "$confirm" | tr '[:upper:]' '[:lower:]' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+    if [[ "$confirm" != "yes" ]]; then
+        printf "\n\e[1;31m[!] Authorization not confirmed. Exiting.\e[0m\n\n"
+        exit 1
+    fi
+    printf "\n\e[1;92m[+] Authorization confirmed. Proceeding.\e[0m\n\n"
+}
 dependencies() {
     command -v php > /dev/null 2>&1 || { echo >&2 "Error: PHP is not installed."; exit 1; }
     command -v ssh  > /dev/null 2>&1 || { echo >&2 "Error: SSH is not installed."; exit 1; }
@@ -277,5 +295,6 @@ camphish() {
     esac
 }
 banner
+disclaimer
 dependencies
 camphish
