@@ -1,6 +1,8 @@
 # CamPhish
-Grab cam shots from target's phone front camera or PC webcam just sending a link.
+Security research tool to simulate camera phishing attacks, for authorized penetration testing only
 ![CamPhish](https://github.com/uzairdeveloper223/CamPhish/blob/main/images/cam_phish_by_uzair.png?raw=true)
+
+IMPORTANT: This project is a security-research / penetration-testing proof-of-concept. Only use it on systems and users for which you have explicit permission. Unauthorized use is illegal.
 
 # What is CamPhish?
 <p>CamPhish is techniques to take cam shots of target's phone front camera or PC webcam. CamPhish Hosts a fake website on in built PHP server and uses serveo.net & localhost.run Tunnel to generate a link which we will forward to the target, which can be used on over internet. website asks for camera permission and if the target allows it, this tool grab camshots of target's device
@@ -28,8 +30,6 @@ Original repo: https://github.com/techchipnet/CamPhish
 Modified by: Uzair Developer (this branch)
 
 ---
-
-IMPORTANT: This project is a security-research / penetration-testing proof-of-concept. Only use it on systems and users for which you have explicit permission. Unauthorized use is illegal.(Fuck this)
 
 ## What's changed in V2.1 (this branch)
 
