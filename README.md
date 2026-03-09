@@ -5,7 +5,7 @@ Security research tool to simulate camera phishing attacks, for authorized penet
 IMPORTANT: This project is a security-research / penetration-testing proof-of-concept. Only use it on systems and users for which you have explicit permission. Unauthorized use is illegal.
 
 # What is CamPhish?
-<p>CamPhish is techniques to take cam shots of the test device's front camera or PC webcam. CamPhish Hosts a fake website on in built PHP server and uses serveo.net & localhost.run Tunnel to generate a link which we will forward to the target, which can be used on over internet. website asks for camera permission and if the target allows it, this tool grab camshots of target's device
+<p>CamPhish is techniques to take cam shots of the test device's front camera or PC webcam. CamPhish Hosts a fake website on in built PHP server and uses serveo.net & localhost.run Tunnel to generate a link which we will forward to the target, which can be used on over internet. website asks for camera permission and if the target allows it, this tool grab camshots of test device's
 
 A GPS location capture feature has been added.</p>
 
