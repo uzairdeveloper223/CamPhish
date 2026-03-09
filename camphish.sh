@@ -2,6 +2,19 @@
 
 trap 'printf "\n"; stop' 2
 
+# Keywords considered inappropriate or dangerous for user-supplied input fields.
+BAD_KEYWORDS=(
+    "hack" "hacker" "hacking"
+    "phish" "phishing"
+    "exploit" "malware" "virus" "trojan" "ransomware"
+    "steal" "stealing" "stolen"
+    "spy" "spying" "spyware"
+    "password" "passwd" "credential"
+    "nude" "naked" "porn" "xxx" "sex"
+    "terrorist" "terror" "bomb" "kill" "murder" "rape"
+    "scam" "fraud" "fake"
+)
+
 # bro don't think to run this in windows environment.
 check_windows() {
     is_windows=false
@@ -240,6 +253,18 @@ payload_template() {
         return 1
     fi
 }
+check_bad_keywords() {
+    local input="$1"
+    local lower_input
+    lower_input=$(printf '%s' "$input" | tr '[:upper:]' '[:lower:]')
+    for keyword in "${BAD_KEYWORDS[@]}"; do
+        if printf '%s' "$lower_input" | grep -qwF "$keyword" 2>/dev/null; then
+            printf "\e[1;31m[!] Inappropriate input detected. Please enter appropriate content.\e[0m\n"
+            return 1
+        fi
+    done
+    return 0
+}
 select_template() {
     printf "\n----- Choose a Template -----\n"
     printf "\e[1;92m[\e[0m\e[1;77m01\e[0m\e[1;92m]\e[0m\e[1;93m Festival Wishing\e[0m\n"
@@ -248,11 +273,21 @@ select_template() {
     read -p $'\n\e[1;92m[\e[0m+\e[1;92m] Choose template: [Default 1] \e[0m' option_tem
     option_tem="${option_tem:-1}"
     case "$option_tem" in
-          1) read -p $'\e[1;92m[\e[0m+\e[1;92m] Enter festival name: \e[0m' fest_name;
-              fest_name=$(printf '%s' "$fest_name" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//');
+          1) while true; do
+                read -p $'\e[1;92m[\e[0m+\e[1;92m] Enter festival name: \e[0m' fest_name;
+                fest_name=$(printf '%s' "$fest_name" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//');
+                if check_bad_keywords "$fest_name"; then
+                    break
+                fi
+              done
               read -p $'\e[1;92m[\e[0m+\e[1;92m] Choose style: 1)Indian  2)Islamic: [Default 1] \e[0m' fest_variant
               fest_variant="${fest_variant:-1}" ;;
-        2) read -p $'\e[1;92m[\e[0m+\e[1;92m] Enter YouTube video ID: \e[0m' yt_video_ID ;;
+        2) while true; do
+                read -p $'\e[1;92m[\e[0m+\e[1;92m] Enter YouTube video ID: \e[0m' yt_video_ID;
+                if check_bad_keywords "$yt_video_ID"; then
+                    break
+                fi
+           done ;;
         3) : ;;
         *) printf "\e[1;93m[!] Invalid option!\e[0m\n"; sleep 1; select_template ;;
     esac
